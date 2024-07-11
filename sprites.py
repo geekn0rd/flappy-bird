@@ -56,11 +56,16 @@ class Bird(pygame.sprite.Sprite):
     def jump(self):
         self.direction = -400
 
+    def animate(self, dt):
+        self.frame_index += 5 * dt
+        self.frame_index %= 3
+        self.image = self.frames[int(self.frame_index)]
 
+        
 
     def update(self, dt):
         self.affect_gravity(dt)
-        # self.animate(dt)
+        self.animate(dt)
         # self.rotate(dt)
         pass
 
