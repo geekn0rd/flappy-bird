@@ -1,26 +1,35 @@
 import pygame
-pygame.init()
+import sys
+import time
 
-size = width, height = 280, 512
-screen = pygame.display.set_mode(size)
-clock = pygame.time.Clock()
-running = True
-x, y = 140, 256
+from settings import *
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+class Game():
+    def __init__(self):
+        pygame.init()
+        self.display = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.display.set_caption("Flappy Bird!")
+        self.clock = pygame.time.Clock()
+
+        self.all_sprites = pygame.sprite.Group()
+        self.collision_sprites = pygame.sprite.Group()
     
-    screen.fill("green")
-    if clock.get_time() % 2 == 0:
-        x -= 8
-        x %= width
+    def run(self):
+        last_time = time.time()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+            
+            dt = time.time() - last_time
+            last_time = time.time() 
+            
+            pygame.display.update()
+            self.clock.tick(FPS)
 
-    pygame.draw.rect(screen, "blue", pygame.Rect((x + 50, y - 300), (45, 200)))
-    pygame.draw.rect(screen, "blue", pygame.Rect((x + 50, y + 100), (45, 200)))
-    pygame.draw.circle(screen, "red", (width // 2, height // 2), 30)
-    pygame.display.flip()
-    clock.tick(60)
+    
 
-pygame.quit()
+if __name__ == "__main__":
+    game = Game()
+    game.run()
