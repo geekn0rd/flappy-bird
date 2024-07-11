@@ -11,8 +11,6 @@ Welcome to the Flappy Bird game, implemented in Python using the Pygame library.
 - **Avoid Pipes**: Navigate through the gaps between pipes.
 - **Score Points**: Earn points for each set of pipes you successfully pass.
 
-![Gameplay](https://media.giphy.com/media/13ZHjidRzoi7n2/giphy.gif)
-
 
 ## AI Integration
 
