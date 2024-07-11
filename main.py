@@ -3,7 +3,7 @@ import sys
 import time
 
 from settings import *
-from sprites import Background, Ground
+from sprites import Background, Ground, Bird
 
 class Game():
     def __init__(self):
@@ -15,13 +15,16 @@ class Game():
         self.all_sprites = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
 
-        Background(self.all_sprites)
-        Ground(self.all_sprites)
+        self.bg = Background(self.all_sprites)
+        self.gound = Ground(self.all_sprites)
+        self.bird = Bird(self.all_sprites, scale_factor=1.5)
     
     def run(self):
         last_time = time.time()
         while True:
             for event in pygame.event.get():
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE):
+                    self.bird.jump()
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
