@@ -21,6 +21,9 @@ class Game():
 
         self.pipe_timer = pygame.USEREVENT + 1
         pygame.time.set_timer(self.pipe_timer, 1400)
+
+        self.font = pygame.font.SysFont('arial', 30)
+        self.score = 0
     
     def collisions(self):
         if pygame.sprite.spritecollide(self.bird, self.collision_sprites, False, pygame.sprite.collide_mask)\
@@ -28,6 +31,11 @@ class Game():
             pygame.quit()
             sys.exit()
 
+    def display_score(self):
+        self.score = pygame.time.get_ticks() // 100
+        score_surf =  self.font.render(str(self.score), True, "white")
+        score_rect = score_surf.get_rect(midtop=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 10))
+        self.display.blit(score_surf, score_rect)
 
     def run(self):
         last_time = time.time()
@@ -49,7 +57,7 @@ class Game():
             self.collisions()
             self.all_sprites.update(dt)
             self.all_sprites.draw(self.display)
-
+            self.display_score()
             pygame.display.update()
             self.clock.tick(FPS)
 
