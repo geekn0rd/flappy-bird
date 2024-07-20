@@ -42,6 +42,8 @@ class Bird(pygame.sprite.Sprite):
         self.gravity = 1000
         self.direction = 0
 
+        self.mask = pygame.mask.from_surface(self.image)
+
     def import_frames(self, scale_factor):
         self.frames = []
         for i in range(1, 4):
@@ -65,6 +67,7 @@ class Bird(pygame.sprite.Sprite):
     def rotate(self):
         rotated_bird = pygame.transform.rotozoom(self.image, 0.06 * -self.direction, 1)
         self.image = rotated_bird
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         self.affect_gravity(dt)
@@ -92,6 +95,7 @@ class Pipe(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop=(x, randint(-50, -10)))
         
         self.pos = pygame.math.Vector2(self.rect.topleft)
+        self.mask = pygame.mask.from_surface(self.image)
     
     def update(self, dt):
         self.pos.x -= 400 * dt
