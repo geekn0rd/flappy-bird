@@ -3,7 +3,7 @@ import sys
 import time
 
 from settings import *
-from sprites import Background, Ground, Bird
+from sprites import Background, Ground, Bird, Pipe
 
 class Game():
     def __init__(self):
@@ -18,8 +18,10 @@ class Game():
         self.bg = Background(self.all_sprites)
         self.gound = Ground(self.all_sprites)
         self.bird = Bird(self.all_sprites, scale_factor=1.5)
+        self.pipe = Pipe(self.all_sprites)
 
-        
+        self.pipe_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.pipe_timer, 1400)
     
     def run(self):
         last_time = time.time()
@@ -30,6 +32,8 @@ class Game():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == self.pipe_timer:
+                    Pipe(self.all_sprites)
             
             dt = time.time() - last_time
             last_time = time.time() 

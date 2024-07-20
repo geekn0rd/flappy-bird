@@ -82,10 +82,10 @@ class Pipe(pygame.sprite.Sprite):
 
         x = WINDOW_WIDTH + randint(40, 100)
         if orientation == "down":
-            self.image = pygame.transform.flip(self.image, False, True)
             y = WINDOW_HEIGHT + randint(10, 50)
             self.rect = self.image.get_rect(midbottom=(x, y))
         else:
+            self.image = pygame.transform.flip(self.image, False, True)
             self.rect = self.image.get_rect(midtop=(x, randint(-50, -10)))
         
         self.pos = pygame.math.Vector2(self.rect.topleft)
