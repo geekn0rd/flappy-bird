@@ -18,7 +18,6 @@ class Game():
         self.bg = Background(self.all_sprites)
         self.gound = Ground(self.all_sprites)
         self.bird = Bird(self.all_sprites, scale_factor=1.5)
-        self.pipe = Pipe(self.all_sprites)
 
         self.pipe_timer = pygame.USEREVENT + 1
         pygame.time.set_timer(self.pipe_timer, 1400)
@@ -33,7 +32,7 @@ class Game():
                     pygame.quit()
                     sys.exit()
                 if event.type == self.pipe_timer:
-                    Pipe(self.all_sprites)
+                    Pipe(self.all_sprites, scale_factor=1.1)
             
             dt = time.time() - last_time
             last_time = time.time() 

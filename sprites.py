@@ -74,11 +74,14 @@ class Bird(pygame.sprite.Sprite):
 
 
 class Pipe(pygame.sprite.Sprite):
-    def __init__(self, *groups):
+    def __init__(self, *groups, scale_factor=1.0):
         super().__init__(*groups)
 
         orientation = choice(("up", "down"))
-        self.image = pygame.image.load("imgs/pipe.png").convert_alpha()
+
+        surf = pygame.image.load("imgs/pipe.png").convert_alpha()
+        scaled_surf = pygame.transform.scale(surf, pygame.math.Vector2(surf.get_size()) * scale_factor)
+        self.image = scaled_surf
 
         x = WINDOW_WIDTH + randint(40, 100)
         if orientation == "down":
