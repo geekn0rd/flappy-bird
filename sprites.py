@@ -1,4 +1,5 @@
 import pygame
+from random import choice, randint
 from settings import *
 
 class Background(pygame.sprite.Sprite):
@@ -72,3 +73,28 @@ class Bird(pygame.sprite.Sprite):
         pass
 
 
+class Pipe(pygame.sprite.Sprite):
+    def __init__(self, *groups):
+        super().__init__(*groups)
+
+        orientation = choice(("up", "down"))
+        self.image = pygame.image.load("imgs/pipe.png").convert_alpha()
+
+        x = WINDOW_WIDTH + randint(40, 100)
+        if orientation == "down":
+            self.image = pygame.transform.flip(self.image, False, True)
+            y = WINDOW_HEIGHT + randint(10, 50)
+            self.rect = self.image.get_rect(midbottom=(x, y))
+        else:
+            self.rect = self.image.get_rect(midtop=(x, randint(-50, -10)))
+        
+        self.pos = pygame.math.Vector2(self.rect.topleft)
+    
+    def update(self, dt):
+        self.pos.x -= 400 * dt
+        self.rect.x = round(self.pos.x)
+        if self.rect.right <= -100:
+            self.kill()
+
+
+       

@@ -18,6 +18,8 @@ class Game():
         self.bg = Background(self.all_sprites)
         self.gound = Ground(self.all_sprites)
         self.bird = Bird(self.all_sprites, scale_factor=1.5)
+
+        
     
     def run(self):
         last_time = time.time()
