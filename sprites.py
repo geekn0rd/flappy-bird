@@ -57,7 +57,7 @@ class Bird(pygame.sprite.Sprite):
         self.rect.y = round(self.pos.y)
     
     def jump(self):
-        self.direction = -400
+        self.direction = -350
 
     def animate(self, dt):
         self.frame_index += 10 * dt
